@@ -4,6 +4,10 @@ runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 base: xyz.aikoyori.Pissandshittium.BaseApp
 base-version: '22.08'
+build-options:
+  env:
+    SCCACHE_NO_DAEMON: '1'
+    SCCACHE_CONF: /app/sccache_config
 command: chromium
 finish-args:
   - --require-version=1.8.2
