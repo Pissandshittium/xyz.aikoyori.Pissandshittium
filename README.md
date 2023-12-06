@@ -2,7 +2,7 @@
 
 ### Building Pissandshittium
 ```bash
-flatpak install org.freedesktop.Sdk/x86_64/22.08 org.chromium.Chromium.BaseApp/x86_64/22.08
+flatpak install org.freedesktop.Sdk/x86_64/22.08 org.chromium.Chromium.BaseApp/x86_64/22.08 org.freedesktop.Sdk.Extension.llvm14/x86_64/22.08 org.freedesktop.Sdk.Extension.node16/x86_64/22.08 runtime/org.freedesktop.Sdk.Extension.openjdk11/x86_64/22.08
 flatpak-builder _build/ xyz.aikoyori.Pissandshittium.yaml
 ```
 

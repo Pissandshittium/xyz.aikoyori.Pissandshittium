@@ -71,26 +71,6 @@ sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk11
 
 modules:
-  # Based on https://github.com/flathub/shared-modules/blob/master/python2.7/python-2.7.json
-  - name: python2
-    config-opts:
-      - --enable-shared
-      - --with-ensurepip=yes
-      - --with-system-expat
-      - --with-system-ffi
-      - --with-dbmliborder=gdbm
-      - --enable-unicode=ucs4
-    build-options:
-      no-debuginfo: true
-    post-install:
-      - chmod 644 $FLATPAK_DEST/lib/libpython2.7.so.1.0
-    cleanup:
-      - '*'
-    sources:
-      - type: archive
-        url: https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz
-        sha256: b62c0e7937551d0cc02b8fd5cb0f544f9405bafc9a54d3808ed4594812edef43
-
   - name: sccache
     buildsystem: simple
     build-commands:
@@ -108,6 +88,32 @@ modules:
     sources:
         - type: file
           path: sccache.toml
+
+  # Based on https://github.com/flathub/shared-modules/blob/master/python2.7/python-2.7.json
+  # We'd like to build Python 2 with sccache, but i can't ger it to work
+  - name: python2
+    config-opts:
+      - --enable-shared
+      - --with-ensurepip=yes
+      - --with-system-expat
+      - --with-system-ffi
+      - --with-dbmliborder=gdbm
+      - --enable-unicode=ucs4
+    build-options:
+      no-debuginfo: true
+      # env:
+      #   CC: "/app/bin/sccache gcc"
+      # # make -j15
+      # jobs: 15
+    post-install:
+      - chmod 644 $FLATPAK_DEST/lib/libpython2.7.so.1.0
+    cleanup:
+      - '*'
+    sources:
+      - type: archive
+        url: https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz
+        sha256: b62c0e7937551d0cc02b8fd5cb0f544f9405bafc9a54d3808ed4594812edef43
+
 
 
   - name: readelf-symlink

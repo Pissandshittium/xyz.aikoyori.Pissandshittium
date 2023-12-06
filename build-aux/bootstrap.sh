@@ -1,5 +1,6 @@
 #!/bin/bash -ex
 
+export CC="/app/bin/sccache gcc"
 # Needed to build GN itself.
 . /usr/lib/sdk/llvm14/enable.sh
 
@@ -7,6 +8,7 @@
 # compat issues w/ Clang and aren't used by Chromium itself anyway, so just
 # unset them here.
 unset CFLAGS CXXFLAGS LDFLAGS
+
 
 if [[ -d third_party/llvm-build/Release+Asserts/bin ]]; then
   # The build scripts check that the stamp file is present, so write it out
