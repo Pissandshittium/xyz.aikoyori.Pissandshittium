@@ -25,6 +25,7 @@ else
 fi
 
 # (TODO: enable use_qt in the future?)
+# dbus disabled for now
 # DO NOT REUSE THE BELOW API KEY; it is for Flathub only.
 # http://lists.debian.org/debian-legal/2013/11/msg00006.html
 tools/gn/bootstrap/bootstrap.py -v --no-clean --gn-gen-args='
@@ -55,6 +56,9 @@ tools/gn/bootstrap/bootstrap.py -v --no-clean --gn-gen-args='
     enable_remoting=false
     enable_rust=false
     cc_wrapper = "sccache"
+    clang_use_chrome_plugins = false
+    treat_warnings_as_errors=false
+    use_dbus=false
 '
 mkdir -p out/ReleaseFree
 cp out/Release{,Free}/args.gn

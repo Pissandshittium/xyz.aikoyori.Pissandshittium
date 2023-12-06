@@ -137,8 +137,10 @@ modules:
       - ./install.sh
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-119.0.6045.199.tar.xz
-        sha256: b1ae62beb7907d99802b74821d5198bd54a7456df1116d317da653bde8ce6388
+        # url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-119.0.6045.199.tar.xz
+        url: https://github.com/Pissandshittium/pissandshittium/archive/b1661df33537e5504b9dd4e314a389ec04f16568.tar.gz
+        sha256: aa25d3f371b72782e599e548f9ac2a662d53091e31c0ee8e35c4ac3eb0135eff
+        # sha256: b1ae62beb7907d99802b74821d5198bd54a7456df1116d317da653bde8ce6388
         x-checker-data:
           type: chromium
           component: chromium
