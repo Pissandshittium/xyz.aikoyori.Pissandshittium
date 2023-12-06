@@ -2,7 +2,7 @@ app-id: xyz.aikoyori.Pissandshittium
 runtime: org.freedesktop.Platform
 runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
-base: xyz.aikoyori.Pissandshittium.BaseApp
+base: org.chromium.Chromium.BaseApp
 base-version: '22.08'
 build-options:
   env:

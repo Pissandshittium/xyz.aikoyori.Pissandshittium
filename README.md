@@ -1,5 +1,11 @@
 ## Pissandshittium Flatpak
 
+### Building Pissandshittium
+```bash
+flatpak install org.freedesktop.Sdk/x86_64/22.08 org.chromium.Chromium.BaseApp/x86_64/22.08
+flatpak-builder _build/ xyz.aikoyori.Pissandshittium.yaml
+```
+
 ### Extension points
 
 To avoid having to expose more of the host filesystem in the sandbox but still
