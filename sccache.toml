@@ -1,0 +1,15 @@
+[dist]
+scheduler_url = "http://100.78.94.96:10600"
+
+[dist.auth]
+type = "token"
+token = "buildfunniesclient"
+
+# [cache.s3]
+# bucket = "sccache"
+# endpoint = "http://100.107.98.57:9000"
+# use_ssl = false
+# key_prefix = "cappy"
+# region = "us-east-1"
+
+# no_credentials = false

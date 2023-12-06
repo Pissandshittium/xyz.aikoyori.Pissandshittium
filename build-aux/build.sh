@@ -11,5 +11,5 @@ ln_overwrite_all() {
 ln_overwrite_all /usr/lib/sdk/node16 third_party/node/linux/node-linux-x64
 ln_overwrite_all /usr/lib/sdk/openjdk11 third_party/jdk/current
 
-ninja -C out/ReleaseFree -j$FLATPAK_BUILDER_N_JOBS libffmpeg.so
-ninja -C out/Release -j$FLATPAK_BUILDER_N_JOBS chrome chrome_crashpad_handler
+ninja -C out/ReleaseFree -j50 libffmpeg.so
+ninja -C out/Release -j50 chrome chrome_crashpad_handler
