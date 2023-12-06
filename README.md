@@ -1,9 +1,9 @@
-## Chromium Flatpak
+## Pissandshittium Flatpak
 
 ### Extension points
 
 To avoid having to expose more of the host filesystem in the sandbox but still
-allowing extending Chromium, the `org.chromium.Chromium.Extension` extension
+allowing extending Chromium, the `xyz.aikoyori.Pissandshittium.Extension` extension
 point is defined.
 
 This extension point is currently on version '1' and will expose any extension
@@ -15,7 +15,7 @@ manifests](https://developer.chrome.com/docs/apps/nativeMessaging/) under
 #### Legacy extension points
 
 This application also supports two other extension points:
-`org.chromium.Chromium.Policy` and `org.chromium.Chromium.NativeMessagingHost`.
+`xyz.aikoyori.Pissandshittium.Policy` and `xyz.aikoyori.Pissandshittium.NativeMessagingHost`.
 These primarily exist for compatibility reasons and should not be used.
 
 #### Using extension points
@@ -33,8 +33,8 @@ policies, extensions, etc.
 One example of such "unmanaged extension" could be an extension point that exposes
 all system policies installed under `/etc/chromium-browser/policies/{managed,recommended}`.
 This could be done for example by creating an extension point under
-`/var/lib/flatpak/extension/org.chromium.Chromium.Extension.system-policies`, with
-`/var/lib/flatpak/extension/org.chromium.Chromium.Extension.system-policies/<arch>/<version>`
+`/var/lib/flatpak/extension/xyz.aikoyori.Pissandshittium.Extension.system-policies`, with
+`/var/lib/flatpak/extension/xyz.aikoyori.Pissandshittium.Extension.system-policies/<arch>/<version>`
 being a symlink to `/etc/chromium-browser`. Note that `<version>` must match the
 extension point version.
 
