@@ -137,25 +137,34 @@ modules:
         done
       - touch /app/chromium/extensions/no-mount-stamp
 
-  - name: build-aux
-    sources:
-      - type: dir
-        path: build-aux
-    build-commands:
-      - pwd
-      - ls -la
+  # - name: build-aux
+  #   sources:
+  #     - type: dir
+  #       path: build-aux
+  #   build-commands:
+  #     - pwd
+  #     - ls -la
 
 
   - name: chromium
     buildsystem: simple
     build-options:
+      build-args:
+        - --share=network
       env:
         SCCACHE_NO_DAEMON: '1'
         SCCACHE_CONF: /app/sccache_config 
+        DEPOT_TOOLS_UPDATE: '0'
     build-commands:
+      - ls -la
+      - mv latest latest.zip
+      - unzip latest.zip
+      - ls -la
+      - cp ./gn buildtools/linux64/gn
       - ./bootstrap.sh
       - ./build.sh
       - ./install.sh
+
     sources:
       - type: archive
         # url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-119.0.6045.199.tar.xz
@@ -179,6 +188,9 @@ modules:
         commands:
           - rm -rf third_party/llvm
         only-arches: [aarch64]
+      - type: file
+        url: https://chrome-infra-packages.appspot.com/dl/gn/gn/linux-amd64/+/latest
+        sha256: f82ac54f35dc97a84b7f997b4519ecebe4a74c04a4cb4017cd995482894b33d5
       - type: git
         url: https://github.com/llvm/llvm-project
         commit: llvmorg-18-init-4631-gd50b56d1
@@ -201,3 +213,8 @@ modules:
         path: unlink_profiles.py
       - type: file
         path: cobalt.ini
+      - type: git
+        url:  https://chromium.googlesource.com/chromium/tools/depot_tools.git
+        dest: depot_tools
+        commit: 916dda0a0b15bc08af8a8877593d9ddf94e8a610
+
