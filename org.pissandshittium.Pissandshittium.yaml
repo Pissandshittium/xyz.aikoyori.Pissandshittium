@@ -117,23 +117,10 @@ modules:
 
   - name: chromium
     buildsystem: simple
-    build-options:
-      build-args:
-        - --share=network
-      env:
-        SCCACHE_NO_DAEMON: '1'
-        SCCACHE_CONF: /app/sccache_config 
-        DEPOT_TOOLS_UPDATE: '0'
     build-commands:
-      - ls -la
-      - mv latest latest.zip
-      - unzip latest.zip
-      - ls -la
-      - cp ./gn buildtools/linux64/gn
       - ./bootstrap.sh
       - ./build.sh
       - ./install.sh
-
     sources:
       - type: git
         # url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-119.0.6045.199.tar.xz
