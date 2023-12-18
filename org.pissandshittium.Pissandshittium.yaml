@@ -4,10 +4,7 @@ runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 base: org.chromium.Chromium.BaseApp
 base-version: '22.08'
-build-options:
-  env:
-    SCCACHE_NO_DAEMON: '1'
-    SCCACHE_CONF: /app/sccache_config
+
 command: chromium
 finish-args:
   - --require-version=1.8.2
@@ -71,54 +68,26 @@ sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk11
 
 modules:
-  - name: sccache
-    buildsystem: simple
-    build-commands:
-        - install -Dma+rwx sccache /app/bin/sccache
-    sources:
-      - type: archive
-        url: https://github.com/mozilla/sccache/releases/download/v0.2.15/sccache-v0.2.15-x86_64-unknown-linux-musl.tar.gz
-        sha256: e5d03a9aa3b9fac7e490391bbe22d4f42c840d31ef9eaf127a03101930cbb7ca
-        only-arches: [x86_64]
-      - type: archive
-        url: https://github.com/mozilla/sccache/releases/download/v0.2.15/sccache-v0.2.15-aarch64-unknown-linux-musl.tar.gz
-        sha256: 90d91d21a767e3f558196dbd52395f6475c08de5c4951a4c8049575fa6894489
-        only-arches: [aarch64]
-
-
-  # file from local directory
-  - name: sccache_config
-    buildsystem: simple
-    build-commands:
-        - install -Dma+rwx sccache.toml /app/sccache_config
-    sources:
-        - type: file
-          path: sccache.toml
 
   # Based on https://github.com/flathub/shared-modules/blob/master/python2.7/python-2.7.json
-  # We'd like to build Python 2 with sccache, but i can't ger it to work
-  # - name: python2
-  #   config-opts:
-  #     - --enable-shared
-  #     - --with-ensurepip=yes
-  #     - --with-system-expat
-  #     - --with-system-ffi
-  #     - --with-dbmliborder=gdbm
-  #     - --enable-unicode=ucs4
-  #   build-options:
-  #     no-debuginfo: true
-  #     env:
-  #       CC: "/app/bin/sccache gcc"
-  #     # make -j15
-  #     jobs: 15
-  #   post-install:
-  #     - chmod 644 $FLATPAK_DEST/lib/libpython2.7.so.1.0
-  #   cleanup:
-  #     - '*'
-  #   sources:
-  #     - type: archive
-  #       url: https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz
-  #       sha256: b62c0e7937551d0cc02b8fd5cb0f544f9405bafc9a54d3808ed4594812edef43
+  - name: python2
+    config-opts:
+      - --enable-shared
+      - --with-ensurepip=yes
+      - --with-system-expat
+      - --with-system-ffi
+      - --with-dbmliborder=gdbm
+      - --enable-unicode=ucs4
+    build-options:
+      no-debuginfo: true
+    post-install:
+      - chmod 644 $FLATPAK_DEST/lib/libpython2.7.so.1.0
+    cleanup:
+      - '*'
+    sources:
+      - type: archive
+        url: https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz
+        sha256: b62c0e7937551d0cc02b8fd5cb0f544f9405bafc9a54d3808ed4594812edef43
 
 
 
@@ -166,10 +135,10 @@ modules:
       - ./install.sh
 
     sources:
-      - type: archive
+      - type: git
         # url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-119.0.6045.199.tar.xz
-        url: https://github.com/Pissandshittium/pissandshittium/archive/b1661df33537e5504b9dd4e314a389ec04f16568.tar.gz
-        sha256: aa25d3f371b72782e599e548f9ac2a662d53091e31c0ee8e35c4ac3eb0135eff
+        url: https://github.com/Pissandshittium/pissandshittium.git
+        commit: 511b16a33b04d1a1daa8e1b5016282dabb45035b
         # sha256: b1ae62beb7907d99802b74821d5198bd54a7456df1116d317da653bde8ce6388
         # x-checker-data:
         #   type: chromium
@@ -213,8 +182,4 @@ modules:
         path: unlink_profiles.py
       - type: file
         path: cobalt.ini
-      - type: git
-        url:  https://chromium.googlesource.com/chromium/tools/depot_tools.git
-        dest: depot_tools
-        commit: 916dda0a0b15bc08af8a8877593d9ddf94e8a610
 

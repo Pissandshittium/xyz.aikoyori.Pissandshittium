@@ -9,7 +9,6 @@ export CC="/app/bin/sccache gcc"
 # unset them here.
 unset CFLAGS CXXFLAGS LDFLAGS
 
-
 if [[ -d third_party/llvm-build/Release+Asserts/bin ]]; then
   # The build scripts check that the stamp file is present, so write it out
   # here.
@@ -25,11 +24,6 @@ else
       --without-android --without-fuchsia --without-zstd \
       --with-ml-inliner-model=
 fi
-
-export PATH="$PWD/depot_tools:$PATH"
-gclient config https://chromium.googlesource.com/chromium/src
-gclient sync
-gclient runhooks
 
 # (TODO: enable use_qt in the future?)
 # dbus disabled for now
